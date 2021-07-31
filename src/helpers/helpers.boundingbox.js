@@ -58,7 +58,7 @@ const helpersBoundingBox = (three = window.THREE) => {
 
       // Geometry
       const geometry = new three.BoxGeometry(dimensions.x, dimensions.y, dimensions.z);
-      geometry.applyMatrix4(
+      geometry.applyMatrix(
         new three.Matrix4().makeTranslation(
           halfDimensions.x + offset.x,
           halfDimensions.y + offset.y,
@@ -73,7 +73,7 @@ const helpersBoundingBox = (three = window.THREE) => {
       });
 
       const mesh = new three.Mesh(this._geometry, null);
-      mesh.applyMatrix4(this._stack.ijk2LPS);
+      mesh.applyMatrix(this._stack.ijk2LPS);
       mesh.visible = this._visible;
       this._meshStack = mesh;
 

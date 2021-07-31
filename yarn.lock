@@ -536,6 +536,11 @@ async-each@^1.0.0:
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
   integrity sha1-GdOGodntxufByF04iu28xW0zYC0=
 
+async-each@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.nlark.com/async-each/download/async-each-1.0.3.tgz#b727dbf87d7651602f06f4d4ac387f47d91b0cbf"
+  integrity sha1-tyfb+H12UWAvBvTUrDh/R9kbDL8=
+
 async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
@@ -1231,8 +1236,15 @@ binary-extensions@^1.0.0:
 
 bindings@1.2.x, bindings@~1.2.1:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+  resolved "https://registry.npm.taobao.org/bindings/download/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
   integrity sha1-FK1hE4EtLTfXLme0ystLtyZQXxE=
+
+bindings@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npm.taobao.org/bindings/download/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  integrity sha1-EDU8npRTNLwFEabZCzj7x8nFBN8=
+  dependencies:
+    file-uri-to-path "1.0.0"
 
 bitsyntax@~0.1.0:
   version "0.1.0"
@@ -1343,7 +1355,7 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-braces@^2.3.0, braces@^2.3.1:
+braces@^2.3.0, braces@^2.3.1, braces@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/braces/-/braces-2.3.2.tgz#5979fd3f14cd531565e5fa2df1abfff1dfaee729"
   integrity sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==
@@ -1580,7 +1592,7 @@ buffer@^5.0.2:
 
 bufferutil@1.2.x:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/bufferutil/-/bufferutil-1.2.1.tgz#37be5d36e1e06492221e68d474b1ac58e510cbd7"
+  resolved "https://registry.nlark.com/bufferutil/download/bufferutil-1.2.1.tgz#37be5d36e1e06492221e68d474b1ac58e510cbd7"
   integrity sha1-N75dNuHgZJIiHmjUdLGsWOUQy9c=
   dependencies:
     bindings "1.2.x"
@@ -1761,7 +1773,7 @@ check-types@^7.3.0:
 
 chokidar@^1.1.0, chokidar@^1.6.1:
   version "1.7.0"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
+  resolved "https://registry.nlark.com/chokidar/download/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   integrity sha1-eY5ol3gVHIB2tLNg5e3SjNortGg=
   dependencies:
     anymatch "^1.3.0"
@@ -1794,6 +1806,25 @@ chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.3, chokidar@^2.0.4:
     upath "^1.0.5"
   optionalDependencies:
     fsevents "^1.2.2"
+
+chokidar@^2.1.5:
+  version "2.1.8"
+  resolved "https://registry.nlark.com/chokidar/download/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
+  integrity sha1-gEs6e2qZNYw8XGHnHYco8EHP+Rc=
+  dependencies:
+    anymatch "^2.0.0"
+    async-each "^1.0.1"
+    braces "^2.3.2"
+    glob-parent "^3.1.0"
+    inherits "^2.0.3"
+    is-binary-path "^1.0.0"
+    is-glob "^4.0.0"
+    normalize-path "^3.0.0"
+    path-is-absolute "^1.0.0"
+    readdirp "^2.2.1"
+    upath "^1.1.1"
+  optionalDependencies:
+    fsevents "^1.2.7"
 
 chownr@^1.0.1, chownr@^1.1.1:
   version "1.1.1"
@@ -3097,7 +3128,7 @@ figures@^2.0.0:
   dependencies:
     escape-string-regexp "^1.0.5"
 
-file-uri-to-path@1:
+file-uri-to-path@1, file-uri-to-path@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
   integrity sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
@@ -3372,6 +3403,14 @@ fsevents@^1.0.0, fsevents@^1.2.2:
   dependencies:
     nan "^2.9.2"
     node-pre-gyp "^0.10.0"
+
+fsevents@^1.2.7:
+  version "1.2.13"
+  resolved "https://registry.nlark.com/fsevents/download/fsevents-1.2.13.tgz#f325cb0455592428bcf11b383370ef70e3bfcc38"
+  integrity sha1-8yXLBFVZJCi88Rs4M3DvcOO/zDg=
+  dependencies:
+    bindings "^1.5.0"
+    nan "^2.12.1"
 
 ftp@~0.3.10:
   version "0.3.10"
@@ -4966,9 +5005,18 @@ live-server@^1.1.0:
     send latest
     serve-index "^1.9.1"
 
+livereload@0.8.0:
+  version "0.8.0"
+  resolved "https://registry.npm.taobao.org/livereload/download/livereload-0.8.0.tgz#9af99cf8a262152cf7176b320accfc5d2ae4f8bf"
+  integrity sha1-mvmc+KJiFSz3F2syCsz8XSrk+L8=
+  dependencies:
+    chokidar "^2.1.5"
+    opts ">= 1.2.0"
+    ws "^1.1.5"
+
 livereload@^0.4.1:
   version "0.4.1"
-  resolved "https://registry.yarnpkg.com/livereload/-/livereload-0.4.1.tgz#c54e164c35d15badbcdb6b83041eb10b8fdecb97"
+  resolved "https://registry.npm.taobao.org/livereload/download/livereload-0.4.1.tgz#c54e164c35d15badbcdb6b83041eb10b8fdecb97"
   integrity sha1-xU4WTDXRW62822uDBB6xC4/ey5c=
   dependencies:
     chokidar "^1.1.0"
@@ -5547,14 +5595,19 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
-nan@^2.0.5, nan@^2.9.2:
+nan@^2.0.5, nan@^2.12.1:
+  version "2.14.2"
+  resolved "https://registry.npm.taobao.org/nan/download/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
+  integrity sha1-9TdkAGlRaPTMaUrJOT0MlYXu6hk=
+
+nan@^2.9.2:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.1.tgz#90e22bccb8ca57ea4cd37cc83d3819b52eea6766"
   integrity sha512-iji6k87OSXa0CcrLl9z+ZiYSuR2o+c0bGuNmXdrhTQTakxytAFsC56SArGYoiHlJlFoHSnvmhpceZJaXkVuOtA==
 
 nan@~2.4.0:
   version "2.4.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
+  resolved "https://registry.npm.taobao.org/nan/download/nan-2.4.0.tgz#fb3c59d45fe4effe215f0b890f8adf6eb32d2232"
   integrity sha1-+zxZ1F/k7/4hXwuJD4rfbrMtIjI=
 
 nanomatch@^1.2.9:
@@ -5760,6 +5813,11 @@ normalize-path@^2.0.0, normalize-path@^2.0.1, normalize-path@^2.1.1:
   integrity sha1-GrKLVW4Zg2Oowab35vogE3/mrtk=
   dependencies:
     remove-trailing-separator "^1.0.1"
+
+normalize-path@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.nlark.com/normalize-path/download/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
+  integrity sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=
 
 normalize-url@^1.0.0:
   version "1.9.1"
@@ -5982,13 +6040,13 @@ optionator@^0.8.1:
 
 options@>=0.0.5:
   version "0.0.6"
-  resolved "https://registry.yarnpkg.com/options/-/options-0.0.6.tgz#ec22d312806bb53e731773e7cdaefcf1c643128f"
+  resolved "https://registry.npm.taobao.org/options/download/options-0.0.6.tgz#ec22d312806bb53e731773e7cdaefcf1c643128f"
   integrity sha1-7CLTEoBrtT5zF3Pnza788cZDEo8=
 
 "opts@>= 1.2.0":
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/opts/-/opts-1.2.6.tgz#d185c0425cfdeb9da1d182908b65b5c0238febb3"
-  integrity sha1-0YXAQlz9652h0YKQi2W1wCOP67M=
+  version "2.0.2"
+  resolved "https://registry.npm.taobao.org/opts/download/opts-2.0.2.tgz#a17e189fbbfee171da559edd8a42423bc5993ce1"
+  integrity sha1-oX4Yn7v+4XHaVZ7dikJCO8WZPOE=
 
 original@^1.0.0:
   version "1.0.2"
@@ -6727,7 +6785,7 @@ readable-stream@~2.0.5:
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
-readdirp@^2.0.0:
+readdirp@^2.0.0, readdirp@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-2.2.1.tgz#0e87622a3325aa33e892285caf8b4e846529a525"
   integrity sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==
@@ -7884,10 +7942,10 @@ text-encoding@0.6.4:
   resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
   integrity sha1-45mpgiV6J22uQou5KEXLcb3CbRk=
 
-three@latest:
+three@0.99.0:
   version "0.99.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.99.0.tgz#65711fda7a16501da83948121437d824df1fea19"
-  integrity sha512-DmNNq6H6nRGaqxScJ8x7v5VjdtDZR72oTVwDdKbB2BYNFxCkAoo9vdFAznEsMu9YzTV2yFvbVs7qHRzvJZzTIg==
+  resolved "https://registry.nlark.com/three/download/three-0.99.0.tgz#65711fda7a16501da83948121437d824df1fea19"
+  integrity sha1-ZXEf2noWUB2oOUgSFDfYJN8f6hk=
 
 through2@^2.0.0:
   version "2.0.5"
@@ -8173,7 +8231,7 @@ uglifyjs@*:
 
 ultron@1.0.x:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
+  resolved "https://registry.nlark.com/ultron/download/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
   integrity sha1-rOEWq1V80Zc4ak6I9GhTeMiy5Po=
 
 ultron@~1.1.0:
@@ -8275,6 +8333,11 @@ upath@^1.0.5:
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
   integrity sha512-bzpH/oBhoS/QI/YtbkqCg6VEiPYjSZtrHQM6/QnJS6OL9pKUFLqb3aFh4Scvwm45+7iAgiMkLhSbaZxUqmrprw==
 
+upath@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/upath/download/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
+  integrity sha1-j2bbzVWog6za5ECK+LA1pQRMGJQ=
+
 update-notifier@^0.6.0:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-0.6.3.tgz#776dec8daa13e962a341e8a1d98354306b67ae08"
@@ -8347,7 +8410,7 @@ useragent@2.2.1:
 
 utf-8-validate@1.2.x:
   version "1.2.2"
-  resolved "https://registry.yarnpkg.com/utf-8-validate/-/utf-8-validate-1.2.2.tgz#8bb871a4741e085c70487ca7acdbd7d6d36029eb"
+  resolved "https://registry.nlark.com/utf-8-validate/download/utf-8-validate-1.2.2.tgz?cache=0&sync_timestamp=1620068388313&other_urls=https%3A%2F%2Fregistry.nlark.com%2Futf-8-validate%2Fdownload%2Futf-8-validate-1.2.2.tgz#8bb871a4741e085c70487ca7acdbd7d6d36029eb"
   integrity sha1-i7hxpHQeCFxwSHynrNvX1tNgKes=
   dependencies:
     bindings "~1.2.1"
@@ -8639,10 +8702,10 @@ webpack-sources@^1.0.1, webpack-sources@^1.1.0, webpack-sources@^1.3.0:
 
 webpack-watch-livereload-plugin@^0.0.1:
   version "0.0.1"
-  resolved "https://registry.yarnpkg.com/webpack-watch-livereload-plugin/-/webpack-watch-livereload-plugin-0.0.1.tgz#5706c1c82a7e82f4c444ae8e8d7ea9f079ac7b03"
+  resolved "https://registry.nlark.com/webpack-watch-livereload-plugin/download/webpack-watch-livereload-plugin-0.0.1.tgz#5706c1c82a7e82f4c444ae8e8d7ea9f079ac7b03"
   integrity sha1-VwbByCp+gvTERK6OjX6p8HmsewM=
   dependencies:
-    livereload "^0.4.1"
+    livereload "^0.8.0"
 
 webpack@^4.16.3:
   version "4.27.1"
@@ -8772,7 +8835,7 @@ write-file-atomic@^1.1.2:
 
 ws@^0.8.0:
   version "0.8.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-0.8.1.tgz#6b65273b99193c5f067a4cf5809598f777e3b759"
+  resolved "https://registry.nlark.com/ws/download/ws-0.8.1.tgz#6b65273b99193c5f067a4cf5809598f777e3b759"
   integrity sha1-a2UnO5kZPF8Gekz1gJWY93fjt1k=
   dependencies:
     options ">=0.0.5"
@@ -8780,6 +8843,14 @@ ws@^0.8.0:
   optionalDependencies:
     bufferutil "1.2.x"
     utf-8-validate "1.2.x"
+
+ws@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.nlark.com/ws/download/ws-1.1.5.tgz#cbd9e6e75e09fc5d2c90015f21f0c40875e0dd51"
+  integrity sha1-y9nm514J/F0skAFfIfDECHXg3VE=
+  dependencies:
+    options ">=0.0.5"
+    ultron "1.0.x"
 
 ws@^4.0.0:
   version "4.1.0"

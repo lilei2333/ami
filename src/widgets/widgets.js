@@ -14,6 +14,8 @@ import Rectangle, { widgetsRectangle } from './widgets.rectangle';
 import Ruler, { widgetsRuler } from './widgets.ruler';
 import VelocityTimeIntegral, { widgetsVelocityTimeIntegral } from './widgets.velocityTimeIntegral';
 import VoxelProbe, { widgetsVoxelprobe } from './widgets.voxelProbe';
+import LineBrush, { widgetsLineBrush } from './widgets.lineBrush';
+
 
 export {
   Css as WidgetsCss,
@@ -45,4 +47,6 @@ export {
   widgetsVelocityTimeIntegral as velocityTimeIntegralWidgetFactory,
   VoxelProbe as VoxelProbeWidget,
   widgetsVoxelprobe as voxelprobeWidgetFactory,
+  LineBrush as LineBrushWidget,
+  widgetsLineBrush as lineBrushWidgetFactory,
 };

@@ -87,6 +87,7 @@ if (process.env.NODE_WEBPACK_TARGET) {
   const dataPath = path.resolve(__dirname, 'data');
 
   config.devServer = {
+    port:8090,
     contentBase: [dataPath, workPath, path.resolve(__dirname, 'build')],
     historyApiFallback: true,
   };
