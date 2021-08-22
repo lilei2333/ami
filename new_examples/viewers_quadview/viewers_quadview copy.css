@@ -1,0 +1,146 @@
+#stats {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.visualizer {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  background-color: #353535;
+}
+
+#r0 {
+  border-top: 2px solid #03a9f4;
+}
+
+#r1 {
+  border-top: 2px solid #f44336;
+}
+
+#r2 {
+  border-top: 2px solid #ffeb3b;
+}
+
+#r3 {
+  border-top: 2px solid #8bc34a;
+}
+
+#my-gui-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+
+.viewer {
+  background-color: #000;
+  width: 50%;
+  height: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.renderer,
+.orientation {
+  background-color: #212121;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.orientation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direction {
+  z-index: 1;
+  color: #fff;
+  text-transform: uppercase;
+  /* font-size: 16px; */
+  position: absolute;
+  margin: 14px;
+  /* padding: 4px; */
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#top1 {
+  top: 0;
+}
+
+#bottom1 {
+  bottom: 0;
+}
+
+#left1 {
+  left: 0;
+}
+
+#right1 {
+  right: 0;
+}
+
+#top2 {
+  top: 0;
+}
+
+#bottom2 {
+  bottom: 0;
+}
+
+#left2 {
+  left: 0;
+}
+
+#right2 {
+  right: 0;
+}
+
+#top3 {
+  top: 0;
+}
+
+#bottom3 {
+  bottom: 0;
+}
+
+#left3 {
+  left: 0;
+}
+
+#right3 {
+  right: 0;
+}
