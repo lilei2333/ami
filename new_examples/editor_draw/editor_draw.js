@@ -601,8 +601,8 @@ window.onload = function() {
     stack2 = mergedSeries[1].stack[0];
 
     if (stack.modality === 'SEG') {
-      stack = mergedSeries[0].stack[0];
-      stack2 = mergedSeries[1].stack[0];
+      stack = mergedSeries[1].stack[0];
+      stack2 = mergedSeries[0].stack[0];
     }
 
     stackHelper = new AMI.StackHelper(stack);
@@ -762,7 +762,7 @@ window.onload = function() {
       [[0, 1], [1, 1]]
     );
     lutLayer0.luts = AMI.LutHelper.presetLuts();
-    lutLayer0.lut = 'random';
+    // lutLayer0.lut = 'random';
     stackHelper.slice.lut = 1;
     stackHelper.slice.lutTexture = lutLayer0.texture;
 

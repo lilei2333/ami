@@ -62,7 +62,7 @@
     "math-float32-to-binary-string": "^1.0.0",
     "nifti-reader-js": "v0.5.3",
     "nrrd-js": "^0.2.1",
-    "pako": "1.0.1",
+    "pako": "2.0.4",
     "three": "0.99.0",
     "webpack-watch-livereload-plugin": "^0.0.1"
   },

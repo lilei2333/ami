@@ -1,20 +1,3 @@
-/* globals dat*/
-// general imports
-
-// import AMI.OrthographicCamera from 'base/cameras/cameras.orthographic';
-// import AMI.TrackballOrthoControl from 'base/controls/controls.trackballortho';
-// import AMI.LutHelper from 'base/helpers/helpers.lut';
-// import AMI.StackHelper from 'base/helpers/helpers.stack';
-// import AMI.VolumeLoader from 'base/loaders/loaders.volume';
-
-// // shaders imports
-// import AMI.LayerUniformShader from 'base/shaders/shaders.layer.uniform';
-// import AMI.LayerVertexShader from 'base/shaders/shaders.layer.vertex';
-// import AMI.LayerFragmentShader from 'base/shaders/shaders.layer.fragment';
-// import AMI.DataUniformShader from 'base/shaders/shaders.data.uniform';
-// import AMI.DataVertexShader from 'base/shaders/shaders.data.vertex';
-// import AMI.DataFragmentShader from 'base/shaders/shaders.data.fragment';
-
 // standard global variables
 let controls;
 let renderer;
@@ -23,7 +6,7 @@ let threeD;
 let sceneLayer0TextureTarget;
 let sceneLayer1TextureTarget;
 let sceneLayer0;
-let lutLayer0;
+// let lutLayer0;
 let sceneLayer1;
 let meshLayer1;
 let uniformsLayer1;
@@ -57,7 +40,7 @@ let cursor = {
 };
 let segmentsList = [];
 let segmentsDict = {};
-let firstRender = false;
+// let firstRender = false;
 
 // FUNCTIONS
 /**
@@ -101,30 +84,71 @@ function setupEditor() {
           if (pixel[3] > 0 && i >= 0 && j >= 0 && k >= 0) {
             // find index and texture
             let voxelIndex = i + j * stack2._columns + k * stack2._rows * stack2._columns;
-            voxelIndex *= 4;
             let textureSize = 4096;
-            let textureDimension = textureSize * textureSize;
+            let textureDimension = textureSize * textureSize * 4;
+            let rawDataIndex;
+            let inRawDataIndex;
+            let oldValue;
+            let newValue;
 
-            let rawDataIndex = ~~(voxelIndex / textureDimension);
-            let inRawDataIndex = voxelIndex % textureDimension;
-
-            // update value...
-            let oldValue =
-            (stack2.rawData[rawDataIndex][inRawDataIndex + 3] << 24) |
-            (stack2.rawData[rawDataIndex][inRawDataIndex + 2] << 16) |
-            (stack2.rawData[rawDataIndex][inRawDataIndex + 1] << 8) |
-            (stack2.rawData[rawDataIndex][inRawDataIndex]);
-            let newValue = cursor.value;
-
-            if (oldValue != newValue) {
-              // update raw data
-              stack2._rawData[rawDataIndex][inRawDataIndex] =  (newValue) & 0x000000FF;
-              stack2._rawData[rawDataIndex][inRawDataIndex+1] = (newValue >>> 8) & 0x000000FF;
-              stack2._rawData[rawDataIndex][inRawDataIndex+2] = (newValue >>> 16) & 0x000000FF;
-              stack2._rawData[rawDataIndex][inRawDataIndex+3] = (newValue >>> 24) & 0x000000FF;
-              // update texture that is passed to shader
-              textures2[rawDataIndex].image.data = stack2.rawData[rawDataIndex]; // tex;
-              textures2[rawDataIndex].needsUpdate = true;
+            // see ami.js/model/model.stack.js 529 _packTo8Bits
+            switch (stack2._bitsAllocated) {
+              case 8:
+                rawDataIndex = ~~(voxelIndex / textureDimension);
+                inRawDataIndex = voxelIndex % textureDimension;
+                // update value...
+                oldValue = stack2.rawData[rawDataIndex][inRawDataIndex];
+                newValue = cursor.value;
+                if (oldValue != newValue) {
+                  // update raw data
+                  stack2._rawData[rawDataIndex][inRawDataIndex] = newValue;
+                  // update texture that is passed to shader
+                  textures2[rawDataIndex].image.data = stack2.rawData[rawDataIndex]; // tex;
+                  textures2[rawDataIndex].needsUpdate = true;
+                }
+                break;
+              case 16:
+                voxelIndex *= 2;
+                rawDataIndex = ~~(voxelIndex / textureDimension);
+                inRawDataIndex = voxelIndex % textureDimension;
+                // update value...
+                oldValue =
+                  (stack2.rawData[rawDataIndex][inRawDataIndex + 1] << 8) |
+                  (stack2.rawData[rawDataIndex][inRawDataIndex]);
+                newValue = cursor.value;
+                if (oldValue != newValue) {
+                  // update raw data
+                  stack2._rawData[rawDataIndex][inRawDataIndex] = (newValue) & 0x00ff;
+                  stack2._rawData[rawDataIndex][inRawDataIndex + 1] = (newValue >>> 8) & 0x00ff;
+                  // update texture that is passed to shader
+                  textures2[rawDataIndex].image.data = stack2.rawData[rawDataIndex]; // tex;
+                  textures2[rawDataIndex].needsUpdate = true;
+                }
+                break;
+              case 32:
+                voxelIndex *= 4;
+                rawDataIndex = ~~(voxelIndex / textureDimension);
+                inRawDataIndex = voxelIndex % textureDimension;
+                // update value...
+                oldValue =
+                  (stack2.rawData[rawDataIndex][inRawDataIndex + 3] << 24) |
+                  (stack2.rawData[rawDataIndex][inRawDataIndex + 2] << 16) |
+                  (stack2.rawData[rawDataIndex][inRawDataIndex + 1] << 8) |
+                  (stack2.rawData[rawDataIndex][inRawDataIndex]);
+                newValue = cursor.value;
+                if (oldValue != newValue) {
+                  // update raw data
+                  stack2._rawData[rawDataIndex][inRawDataIndex] = (newValue) & 0x000000FF;
+                  stack2._rawData[rawDataIndex][inRawDataIndex + 1] = (newValue >>> 8) & 0x000000FF;
+                  stack2._rawData[rawDataIndex][inRawDataIndex + 2] = (newValue >>> 16) & 0x000000FF;
+                  stack2._rawData[rawDataIndex][inRawDataIndex + 3] = (newValue >>> 24) & 0x000000FF;
+                  // update texture that is passed to shader
+                  textures2[rawDataIndex].image.data = stack2.rawData[rawDataIndex]; // tex;
+                  textures2[rawDataIndex].needsUpdate = true;
+                }
+                break;
+              default:
+                break;
             }
           }
         }
@@ -221,39 +245,39 @@ function setupEditor() {
     /**
      *
      */
-    function updateDOM() {
-      // lets events go through or not for scrolling, padding, zooming, etc.
-      if (isEditing) {
-        canvasDiv.className = 'editing';
-        document.getElementById('help').style.display = 'none';
-      } else {
-        canvasDiv.className = 'exploring';
-        document.getElementById('help').style.display = 'block';
-      }
-    }
+    // function updateDOM() {
+    //   // lets events go through or not for scrolling, padding, zooming, etc.
+    //   if (isEditing) {
+    //     canvasDiv.className = 'editing';
+    //     document.getElementById('help').style.display = 'none';
+    //   } else {
+    //     canvasDiv.className = 'exploring';
+    //     document.getElementById('help').style.display = 'block';
+    //   }
+    // }
 
     /**
      *
      */
-    function onKeyDown(e) {
-      if (e.keyCode === 17) {
-        isEditing = true;
-        isDrawing = false;
-        updateDOM();
-      }
-    }
+    // function onKeyDown(e) {
+    //   if (e.keyCode === 17) {
+    //     isEditing = true;
+    //     isDrawing = false;
+    //     updateDOM();
+    //   }
+    // }
 
-    /**
-     *
-     */
-    function onKeyUp(e) {
-      if (e.keyCode === 17) {
-        isEditing = false;
-        isDrawing = false;
-        clearCanvas();
-        updateDOM();
-      }
-    }
+    // /**
+    //  *
+    //  */
+    // function onKeyUp(e) {
+    //   if (e.keyCode === 17) {
+    //     isEditing = false;
+    //     isDrawing = false;
+    //     clearCanvas();
+    //     updateDOM();
+    //   }
+    // }
 
     /**
      *
@@ -268,8 +292,8 @@ function setupEditor() {
     canvasDiv.addEventListener('mousedown', onMouseDown, false);
     canvasDiv.addEventListener('mousemove', onMouseMove, false);
     canvasDiv.addEventListener('mouseup', onMouseUp, false);
-    window.addEventListener('keydown', onKeyDown, false);
-    window.addEventListener('keyup', onKeyUp, false);
+    // window.addEventListener('keydown', onKeyDown, false);
+    // window.addEventListener('keyup', onKeyUp, false);
     canvasDiv.addEventListener('contextmenu', disableRightClick, false);
   }
 
@@ -282,7 +306,7 @@ function render() {
   // render first layer offscreen
   renderer.render(sceneLayer0, camera, sceneLayer0TextureTarget, true);
   // render second layer offscreen
-  renderer.render(sceneLayer1, camera, sceneLayer1TextureTarget, true);
+  renderer.render(sceneLayer1, camera, sceneLayer1TextureTarget, true); //TODO 0 1
   // mix the layers and render it ON screen!
   renderer.render(sceneLayerMix, camera);
 }
@@ -299,7 +323,7 @@ function init() {
     render();
 
     // request new frame
-    requestAnimationFrame(function() {
+    requestAnimationFrame(function () {
       animate();
     });
   }
@@ -361,7 +385,7 @@ function init() {
   animate();
 }
 
-window.onload = function() {
+window.onload = function () {
   // init threeJS...
   init();
   /**
@@ -449,6 +473,9 @@ window.onload = function() {
     ijkBBox[5] = Math.floor(ijkBBox[5]);
   }
 
+  function clearCanvas2() {
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  }
   /**
    *
    */
@@ -469,14 +496,14 @@ window.onload = function() {
       .add(stackHelper, 'index', 1, 181)
       .step(1)
       .listen();
-    indexUpdate.onChange(function() {
+    indexUpdate.onChange(function () {
       updateLayer1();
       updateLayerMix();
       updateIJKBBox();
     });
 
     let updateInterpolation = layer0Folder.add(stackHelper.slice, 'interpolation');
-    updateInterpolation.onChange(function(value) {
+    updateInterpolation.onChange(function (value) {
       if (value) {
         stackHelper.slice.interpolation = 1;
       } else {
@@ -489,7 +516,7 @@ window.onload = function() {
     let layerMixFolder = gui.addFolder('Segmentation');
 
     let opacityLayerMix1 = layerMixFolder.add(layerMix, 'opacity1', 0, 1).step(0.01);
-    opacityLayerMix1.onChange(function(value) {
+    opacityLayerMix1.onChange(function (value) {
       uniformsLayerMix.uOpacity1.value = value;
     });
 
@@ -497,14 +524,28 @@ window.onload = function() {
 
     // EDITOR FODLER
     let editorFolder = gui.addFolder('Editor');
+    let editorOpen = editorFolder.add({
+      'open': false
+    }, 'open');
+    editorOpen.onChange(function (value) {
+      if (value) {
+        canvasDiv.className = 'editing';
+        isEditing = true;
+        isDrawing = false;
+      } else {
+        canvasDiv.className = 'exploring';
+        isEditing = false;
+        isDrawing = false;
+        clearCanvas2();
+      }
+    });
     editorFolder.add(cursor, 'size', 1, 50).step(1);
     let brushSegment = editorFolder.add(cursor, 'segment', segmentsList);
-    brushSegment.onChange(function(value) {
+    brushSegment.onChange(function (value) {
       // update color and value
       cursor.value = segmentsDict[value].value;
       cursor.color = segmentsDict[value].color;
     });
-
     editorFolder.open();
   }
 
@@ -653,7 +694,7 @@ window.onload = function() {
     // Create the Mix layer
     uniformsLayerMix = AMI.LayerUniformShader.uniforms();
     uniformsLayerMix.uTextureBackTest0.value = sceneLayer0TextureTarget.texture;
-    uniformsLayerMix.uTextureBackTest1.value = sceneLayer1TextureTarget.texture;
+    uniformsLayerMix.uTextureBackTest1.value = sceneLayer1TextureTarget.texture; //TODO 0 1
 
     let fls = new AMI.LayerFragmentShader(uniformsLayerMix);
     let vls = new AMI.LayerVertexShader();
@@ -698,17 +739,17 @@ window.onload = function() {
     camera.fitBox(2);
 
     // CREATE LUT
-    lutLayer0 = new AMI.LutHelper(
-      'my-lut-canvases-l0',
-      'default',
-      'linear',
-      [[0, 0, 0, 0], [1, 1, 1, 1]],
-      [[0, 1], [1, 1]]
-    );
-    lutLayer0.luts = AMI.LutHelper.presetLuts();
+    // lutLayer0 = new AMI.LutHelper(
+    //   'my-lut-canvases-l0',
+    //   'default',
+    //   'linear',
+    //   [[0, 0, 0, 0], [1, 1, 1, 1]],
+    //   [[0, 1], [1, 1]]
+    // );
+    // lutLayer0.luts = AMI.LutHelper.presetLuts();
     // lutLayer0.lut = 'random';
-    stackHelper.slice.lut = 1;
-    stackHelper.slice.lutTexture = lutLayer0.texture;
+    // stackHelper.slice.lut = 1;
+    // stackHelper.slice.lutTexture = lutLayer0.texture;
 
     var presetsSegmentation = new AMI.SegmentationPreset('Freesurfer');
     lutLayer1 = new AMI.SegmentationLutHelper(
@@ -748,11 +789,13 @@ window.onload = function() {
   }
 
   let files = ['../data-master/nifti/seg/T1stripvolume.nii.gz', '../data-master/nifti/seg/labels.nii.gz'];
+  // let files = ['../data-master/5ec7f26248mri.nii.gz', '../data-master/5ec7f26248mri_label.nii.gz'];
+
   let loader = new AMI.VolumeLoader(threeD);
 
   loader
     .load(files)
-    .then(function() {
+    .then(function () {
       handleSeries();
       addListeners();
       setupGUI();
@@ -760,11 +803,11 @@ window.onload = function() {
       // force 1st render
       render();
       // notify puppeteer to take screenshot
-      const puppetDiv = document.createElement('div');
-      puppetDiv.setAttribute('id', 'puppeteer');
-      document.body.appendChild(puppetDiv);
+      // const puppetDiv = document.createElement('div');
+      // puppetDiv.setAttribute('id', 'puppeteer');
+      // document.body.appendChild(puppetDiv);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       window.console.log('oops... something went wrong...');
       window.console.log(error);
     });

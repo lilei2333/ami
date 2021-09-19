@@ -8,7 +8,7 @@
 
 	<link rel="stylesheet" type="text/css" href="viewers_quadview copy.css">
 
-	<script type="text/javascript" src="https://use.edgefonts.net/source-code-pro.js"></script>
+	<!-- <script type="text/javascript" src="https://use.edgefonts.net/source-code-pro.js"></script> -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/dataarts/dat.gui/build/dat.gui.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mrdoob/stats.js/build/stats.min.js"></script>
 	<script type="text/javascript" src="https://unpkg.com/three@0.99.0/build/three.js"></script>
@@ -19,7 +19,7 @@
 
 <body>
 	<div id="my-gui-container"></div>
-
+	<div id="my-lut-canvases-l1" style="display:none"></div>
 	<div class="visualizer">
 		<div class="viewer">
 			<div id="r0" class="renderer"></div>
@@ -60,6 +60,7 @@
 				</select>
 			</div>
 			<div id="r1" class="renderer"></div>
+			<div id="canvasDiv1" class="segCanvas"></div>
 		</div>
 		<div class="viewer">
 			<div class="orientation">
@@ -97,6 +98,7 @@
 				</select>
 			</div>
 			<div id="r2" class="renderer"></div>
+			<div id="canvasDiv2" class="segCanvas"></div>
 		</div>
 		<div class="viewer">
 			<div class="orientation">
@@ -134,6 +136,7 @@
 				</select>
 			</div>
 			<div id="r3" class="renderer"></div>
+			<div id="canvasDiv3" class="segCanvas"></div>
 		</div>
 	</div>
 
