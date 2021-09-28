@@ -373,7 +373,7 @@ const camerasOrthographic = (three = window.THREE) => {
         rotationToApply *= -1;
         this._angle += 90;
       } else {
-        rotationToApply = 360 -  (angle - this._angle);
+        rotationToApply = 360 - (angle - this._angle);
         this._angle = angle;
       }
 
@@ -574,42 +574,75 @@ const camerasOrthographic = (three = window.THREE) => {
 
     _vector2Label(direction) {
       const index = this._getMaxIndex(direction);
-      // set vector max value to 1
-      const scaledDirection = direction
-        .clone()
-        .divideScalar(Math.abs(direction.getComponent(index)));
-      const delta = 0.2;
       let label = '';
-
-      // loop through components of the vector
-      for (let i = 0; i < 3; i++) {
-        if (i === 0) {
-          if (scaledDirection.getComponent(i) + delta >= 1) {
-            label += 'L';
-          } else if (scaledDirection.getComponent(i) - delta <= -1) {
-            label += 'R';
+      let gt = direction.getComponent(index) > 0;
+      switch (index) {
+        case 0:
+          if (gt) {
+            label = 'L';
+          } else {
+            label = 'R';
           }
-        }
-
-        if (i === 1) {
-          if (scaledDirection.getComponent(i) + delta >= 1) {
-            label += 'P';
-          } else if (scaledDirection.getComponent(i) - delta <= -1) {
-            label += 'A';
+          break;
+        case 1:
+          if (gt) {
+            label = 'P';
+          } else {
+            label = 'A';
           }
-        }
-
-        if (i === 2) {
-          if (scaledDirection.getComponent(i) + delta >= 1) {
-            label += 'S';
-          } else if (scaledDirection.getComponent(i) - delta <= -1) {
-            label += 'I';
+          break;
+        case 2:
+          if (gt) {
+            label = 'S';
+          } else {
+            label = 'I';
           }
-        }
+          break;
+        default:
+          label = 'L';
+          break;
       }
-
       return label;
     }
+    
+    // _vector2Label(direction) {
+    //   const index = this._getMaxIndex(direction);
+    //   // set vector max value to 1
+    //   const scaledDirection = direction
+    //     .clone()
+    //     .divideScalar(Math.abs(direction.getComponent(index)));
+    //   const delta = 0.2;
+    //   let label = '';
+
+    //   // loop through components of the vector
+    //   for (let i = 0; i < 3; i++) {
+    //     if (i === 0) {
+    //       if (scaledDirection.getComponent(i) + delta >= 1) {
+    //         label += 'L';
+    //       } else if (scaledDirection.getComponent(i) - delta <= -1) {
+    //         label += 'R';
+    //       }
+    //     }
+
+    //     if (i === 1) {
+    //       if (scaledDirection.getComponent(i) + delta >= 1) {
+    //         label += 'P';
+    //       } else if (scaledDirection.getComponent(i) - delta <= -1) {
+    //         label += 'A';
+    //       }
+    //     }
+
+    //     if (i === 2) {
+    //       if (scaledDirection.getComponent(i) + delta >= 1) {
+    //         label += 'S';
+    //       } else if (scaledDirection.getComponent(i) - delta <= -1) {
+    //         label += 'I';
+    //       }
+    //     }
+    //   }
+
+    //   return label;
+    // }
 
     _updateDirections() {
       // up is correct
@@ -732,6 +765,8 @@ const camerasOrthographic = (three = window.THREE) => {
 };
 
 // export factory
-export { camerasOrthographic };
+export {
+  camerasOrthographic
+};
 // default export to
 export default camerasOrthographic();
